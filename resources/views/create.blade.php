@@ -5,7 +5,7 @@
 @section('content')
 
     <div id="create-content">
-        <form method="POST" action="{{ route('tasks.store') }}">
+        <form method="POST" action="{{ route('tasks.store') }}" autocomplete="off">
             @csrf
 
             <input
