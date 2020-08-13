@@ -8,11 +8,13 @@
         <form method="POST" action="{{ route('tasks.store') }}" autocomplete="off">
             @csrf
 
+            <label for="name">Name / Description</label>
             <input
                 class="input @error('name') is-invalid @enderror"
+                id="name"
                 name="name"
                 type="text"
-                placeholder="Name / Description"
+                placeholder="What needs to be done?"
                 maxlength="100"
                 required
             >

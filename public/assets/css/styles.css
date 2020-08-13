@@ -85,6 +85,11 @@ main > h1 {
     color: white;
 }
 
+#create-content > form label {
+    display: block;
+    margin-bottom: 0.250rem;
+}
+
 #create-content > form .input {
     box-sizing: border-box;
     display: block;
