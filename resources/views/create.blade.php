@@ -17,6 +17,7 @@
                 placeholder="What needs to be done?"
                 maxlength="100"
                 required
+                autofocus
             >
 
             <button id="submit-btn" type="submit">Send</button>
