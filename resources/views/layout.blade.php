@@ -8,50 +8,49 @@
 
         <link href="https://fonts.googleapis.com/css?family=Nunito:200,600" rel="stylesheet">
 
-        <style>
-            html, body {
-                background-color: #fff;
-                color: #636b6f;
-                font-family: 'Nunito', sans-serif;
-                font-weight: 200;
-                margin: 0;
-            }
-
-            .top-right {
-                position: absolute;
-                right: 10px;
-                top: 18px;
-            }
-
-            .links > a {
-                color: #636b6f;
-                padding: 0 25px;
-                font-size: 13px;
-                font-weight: 600;
-                letter-spacing: .1rem;
-                text-decoration: none;
-                text-transform: uppercase;
-            }
-        </style>
+        <link rel="stylesheet" href="{{ asset('assets/css/styles.css') }}">
     </head>
     <body>
         <div>
-            @if (Route::has('login'))
-                <div class="top-right links">
-                    @auth
-                        <a href="{{ url('/home') }}">Home</a>
-                    @else
-                        <a href="{{ route('login') }}">Login</a>
+            <header>
+                <a class="inherit-link" href="{{ route('tasks.index') }}">
+                    Laravel to-do list
+                </a>
+            </header>
+            <div class="container">
+                <main>
+                    <h1>@yield('title')</h1>
 
-                        @if (Route::has('register'))
-                            <a href="{{ route('register') }}">Register</a>
-                        @endif
-                    @endauth
-                </div>
-            @endif
+                    @if (Route::currentRouteName() !== 'tasks.index')
+                        <a id="back-link" class="inherit-link" href="{{ route('tasks.index') }}">
+                            Back
+                        </a>
+                    @endif
 
-            <div class="content">
-                @yield('content')
+                    @if ($errors->any())
+                        <div class="alert alert-danger">
+                            <ul>
+                                @foreach ($errors->all() as $error)
+                                    <li class="alert-message">{{ $error }}</li>
+                                @endforeach
+                            </ul>
+                        </div>
+                    @endif
+
+                    @if ($message = Session::get('success'))
+                        <div class="alert alert-success">
+                            <p class="alert-message">{{ $message }}</p>
+                        </div>
+                    @endif
+
+                    @if ($message = Session::get('error'))
+                        <div class="alert alert-danger">
+                            <p class="alert-message">{{ $message }}</p>
+                        </div>
+                    @endif
+
+                    @yield('content')
+                </main>
             </div>
         </div>
     </body>

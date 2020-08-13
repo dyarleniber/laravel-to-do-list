@@ -1,5 +1,24 @@
 @extends('layout')
-  
+
+@section('title', 'Create new task')
+
 @section('content')
-    <h1>Create</h1>
+
+    <div id="create-content">
+        <form method="POST" action="{{ route('tasks.store') }}">
+            @csrf
+
+            <input
+                class="input @error('name') is-invalid @enderror"
+                name="name"
+                type="text"
+                placeholder="Name / Description"
+                maxlength="100"
+                required
+            >
+
+            <button id="submit-btn" type="submit">Send</button>
+        </form>
+    </div>
+
 @endsection

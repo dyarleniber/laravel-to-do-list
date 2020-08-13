@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Task;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class TaskController extends Controller
 {
@@ -35,7 +36,28 @@ class TaskController extends Controller
      */
     public function store(Request $request)
     {
-        return redirect()->route('tasks.index');
+        $request->validate([
+            'name' => 'required|max:100',
+        ]);
+
+        try {
+            DB::beginTransaction();
+
+            $task = new Task();
+            $task->name = $request->name;
+            $task->completed = false;
+            $task->save();
+
+            DB::commit();
+
+            return redirect()->route('tasks.create')
+                ->with('success', 'Task created successfully.');
+        } catch (\Throwable $t) {
+            DB::rollback();
+
+            return redirect()->route('tasks.create')
+                ->with('error', $t->getMessage());
+        }
     }
 
     /**
