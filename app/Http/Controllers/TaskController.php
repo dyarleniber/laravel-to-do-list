@@ -68,11 +68,13 @@ class TaskController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Task  $task
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show(Task $task)
+    public function show(int $id)
     {
+        $task = Task::find($id);
+
         return view('show', ['task' => $task]);
     }
 
