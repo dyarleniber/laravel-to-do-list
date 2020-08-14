@@ -20,7 +20,7 @@
                 autofocus
             >
 
-            <button id="submit-btn" type="submit">Send</button>
+            <button id="submit-btn" type="submit" aria-label="Submit form" title="Submit form">Send</button>
         </form>
     </div>
 
