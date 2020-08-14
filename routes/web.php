@@ -34,4 +34,7 @@ Route::put('tasks/{id}', 'TaskController@update')
 Route::delete('tasks/{id}', 'TaskController@destroy')
     ->name('tasks.destroy');
 
+Route::post('tasks/{id}', 'TaskController@check')
+    ->name('tasks.check');
+
 Route::redirect('/', 'tasks');

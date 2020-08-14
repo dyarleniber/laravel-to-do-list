@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Task;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Log;
 
 class TaskController extends Controller
 {
@@ -57,8 +58,10 @@ class TaskController extends Controller
         } catch (\Throwable $t) {
             DB::rollback();
 
+            Log::error($t->getMessage());
+
             return redirect()->route('tasks.create')
-                ->with('error', $t->getMessage());
+                ->with('error', 'Something went wrong, try again later.');
         }
     }
 
@@ -70,7 +73,7 @@ class TaskController extends Controller
      */
     public function show(Task $task)
     {
-        return view('show');
+        return view('show', ['task' => $task]);
     }
 
     /**
@@ -81,29 +84,93 @@ class TaskController extends Controller
      */
     public function edit(Task $task)
     {
-        return view('edit');
+        return view('edit', ['task' => $task]);
     }
 
     /**
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Task  $task
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Task $task)
+    public function update(Request $request, int $id)
     {
-        return redirect()->route('tasks.index');
+        $request->validate([
+            'name' => 'required|max:100',
+        ]);
+
+        try {
+            DB::beginTransaction();
+
+            $task = Task::find($id);
+            $task->name = $request->name;
+            $task->save();
+
+            DB::commit();
+
+            return back()->with('success', 'Task updated successfully.');
+        } catch (\Throwable $t) {
+            DB::rollback();
+
+            Log::error($t->getMessage());
+
+            return back()->with('error', 'Something went wrong, try again later.');
+        }
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Task  $task
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Task $task)
+    public function destroy(int $id)
     {
-        return redirect()->route('tasks.index');
+        try {
+            DB::beginTransaction();
+
+            $task = Task::find($id);
+            $task->delete();
+
+            DB::commit();
+
+            return redirect()->route('tasks.index')
+                ->with('success', 'Task deleted successfully.');
+        } catch (\Throwable $t) {
+            DB::rollback();
+
+            Log::error($t->getMessage());
+
+            return redirect()->route('tasks.index')
+                ->with('error', 'Something went wrong, try again later.');
+        }
+    }
+
+    /**
+     * Check the specified resource from storage.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function check(int $id)
+    {
+        try {
+            DB::beginTransaction();
+
+            $task = Task::find($id);
+            $task->completed = true;
+            $task->save();
+
+            DB::commit();
+
+            return back()->with('success', 'Task checked successfully.');
+        } catch (\Throwable $t) {
+            DB::rollback();
+
+            Log::error($t->getMessage());
+
+            return back()->with('error', 'Something went wrong, try again later.');
+        }
     }
 }

@@ -27,10 +27,39 @@
                         <p>{{ $task->name }}</p>
                     </div>
                     <div class="grid-actions">
-                        <button type="button" class="grid-item-check" aria-label="Check task" title="Check task"></button>
-                        <button type="button" class="grid-item-view" aria-label="View task" title="View task"></button>
-                        <button type="button" class="grid-item-edit" aria-label="Edit task" title="Edit task"></button>
-                        <button type="button" class="grid-item-remove" aria-label="Remove task" title="Remove task"></button>
+                        <form action="{{ route('tasks.check', ['id' => $task->id]) }}" method="POST">
+                            @csrf
+                            <button
+                                type="submit"
+                                class="grid-item-check"
+                                aria-label="Check task"
+                                title="Check task"
+                            ></button>
+                        </form>
+                        <button
+                            type="button"
+                            class="grid-item-view"
+                            aria-label="View task"
+                            title="View task"
+                            onclick="window.location.href='{{ route('tasks.show', ['id' => $task->id]) }}';"
+                        ></button>
+                        <button
+                            type="button"
+                            class="grid-item-edit"
+                            aria-label="Edit task"
+                            title="Edit task"
+                            onclick="window.location.href='{{ route('tasks.edit', ['id' => $task->id]) }}';"
+                        ></button>
+                        <form action="{{ route('tasks.destroy', ['id' => $task->id]) }}" method="POST">
+                            @method('DELETE')
+                            @csrf
+                            <button
+                                type="submit"
+                                class="grid-item-remove"
+                                aria-label="Remove task"
+                                title="Remove task"
+                            ></button>
+                        </form>
                     </div>
                 @endforeach
                 <div class="grid-links">
