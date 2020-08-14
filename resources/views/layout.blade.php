@@ -21,6 +21,8 @@
                 <main>
                     <h1>@yield('title')</h1>
 
+                    @yield('actions')
+
                     @if (Route::currentRouteName() !== 'tasks.index')
                         <a id="back-link" class="inherit-link" href="{{ route('tasks.index') }}">
                             Back

@@ -2,15 +2,26 @@
 
 @section('title', 'Tasks')
 
+@section('actions')
+    <button
+        type="button"
+        id="create-btn"
+        aria-label="Go to the create page"
+        title="Go to the create page"
+        onclick="window.location.href='{{ route('tasks.create') }}';"
+    >
+        Create task
+    </button>
+@endsection
+
 @section('content')
 
     <div id="index-content">
-        @if ($tasks)
-            <div class="grid">
-                <div>
-                    <strong class="grid-header">Task</strong>
-                </div>
-                <div></div>
+        <div class="grid">
+            <div class="grid-header">
+                <strong>Task</strong>
+            </div>
+            @if (!empty($tasks))
                 @foreach ($tasks as $task)
                     <div>
                         <p>{{ $task->name }}</p>
@@ -25,9 +36,12 @@
                 <div class="grid-links">
                     {{ $tasks->links() }}
                 </div>
-                <div></div>
-            </div>
-        @endif
+            @else
+                <div class="grid-norecords">
+                    <span>No records found.</span>
+                </div>
+            @endif
+        </div>
     </div>
 
 @endsection
