@@ -156,6 +156,11 @@ button:hover {
     text-overflow: ellipsis;
 }
 
+.grid .checked {
+    text-decoration: line-through;
+    color: #37af65;
+}
+
 .grid p:before {
     content: '\2714  ';
 }

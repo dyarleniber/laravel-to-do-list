@@ -21,21 +21,23 @@
             <div class="grid-header">
                 <strong>Task</strong>
             </div>
-            @if (!empty($tasks))
+            @if ($tasks->isNotEmpty())
                 @foreach ($tasks as $task)
                     <div>
-                        <p>{{ $task->name }}</p>
+                        <p class="{{ $task->completed ? 'checked' : '' }}">{{ $task->name }}</p>
                     </div>
                     <div class="grid-actions">
-                        <form action="{{ route('tasks.check', ['id' => $task->id]) }}" method="POST">
-                            @csrf
-                            <button
-                                type="submit"
-                                class="grid-item-check"
-                                aria-label="Check task"
-                                title="Check task"
-                            ></button>
-                        </form>
+                        @if (!$task->completed)
+                            <form action="{{ route('tasks.check', ['id' => $task->id]) }}" method="POST">
+                                @csrf
+                                <button
+                                    type="submit"
+                                    class="grid-item-check"
+                                    aria-label="Check task"
+                                    title="Check task"
+                                ></button>
+                            </form>
+                        @endif
                         <button
                             type="button"
                             class="grid-item-view"
