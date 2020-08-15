@@ -1,6 +1,6 @@
 @extends('layout')
 
-@section('title', 'Task')
+@section('title', 'Show task')
 
 @section('content')
 

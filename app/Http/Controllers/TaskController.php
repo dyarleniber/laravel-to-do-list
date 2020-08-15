@@ -6,6 +6,7 @@ use App\Task;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
+use Illuminate\Validation\Rule;
 
 class TaskController extends Controller
 {
@@ -81,11 +82,13 @@ class TaskController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Task  $task
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit(Task $task)
+    public function edit(int $id)
     {
+        $task = Task::find($id);
+
         return view('edit', ['task' => $task]);
     }
 
@@ -100,6 +103,7 @@ class TaskController extends Controller
     {
         $request->validate([
             'name' => 'required|max:100',
+            'check' => [Rule::in(['completed'])],
         ]);
 
         try {
@@ -107,6 +111,7 @@ class TaskController extends Controller
 
             $task = Task::find($id);
             $task->name = $request->name;
+            $task->completed = $request->check === 'completed' ? true : false;
             $task->save();
 
             DB::commit();
