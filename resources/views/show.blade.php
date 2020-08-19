@@ -2,6 +2,8 @@
 
 @section('title', 'Show task')
 
+@section('back', 'true')
+
 @section('content')
 
     <div id="show-content">

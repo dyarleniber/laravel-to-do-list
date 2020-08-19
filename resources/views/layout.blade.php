@@ -4,18 +4,52 @@
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
 
-        <title>Laravel to-do list</title>
+        <!-- CSRF Token -->
+        <meta name="csrf-token" content="{{ csrf_token() }}">
 
+        <title>{{ config('app.name', 'Laravel to-do list') }}</title>
+
+        <!-- Scripts -->
+        <script src="{{ asset('js/app.js') }}" defer></script>
+
+        <!-- Fonts -->
+        <link rel="dns-prefetch" href="//fonts.gstatic.com">
         <link href="https://fonts.googleapis.com/css?family=Nunito:200,600" rel="stylesheet">
 
+        <!-- Styles -->
         <link rel="stylesheet" href="{{ asset('assets/css/styles.css') }}">
     </head>
     <body>
         <div>
             <header>
                 <a class="inherit-link" href="{{ route('tasks.index') }}">
-                    Laravel to-do list
+                    {{ config('app.name', 'Laravel to-do list') }}
                 </a>
+
+                <ul class="navbar-nav ml-auto">
+                    @guest
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ route('login') }}">Login</a>
+                        </li>
+                        @if (Route::has('register'))
+                            <li class="nav-item">
+                                <a class="nav-link" href="{{ route('register') }}">Register</a>
+                            </li>
+                        @endif
+                    @else
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ route('logout') }}"
+                               onclick="event.preventDefault();
+                                        document.getElementById('logout-form').submit();">
+                                Logout
+                            </a>
+                        </li>
+
+                        <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                            @csrf
+                        </form>
+                    @endguest
+                </ul>
             </header>
             <div class="container">
                 <main>
@@ -23,7 +57,7 @@
 
                     @yield('actions')
 
-                    @if (Route::currentRouteName() !== 'tasks.index')
+                    @hasSection('back')
                         <a id="back-link" class="inherit-link" href="{{ route('tasks.index') }}">
                             Back
                         </a>

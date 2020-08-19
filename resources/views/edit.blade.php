@@ -2,6 +2,8 @@
 
 @section('title', 'Edit task')
 
+@section('back', 'true')
+
 @section('content')
 
     <div id="edit-content">

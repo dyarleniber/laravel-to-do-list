@@ -31,6 +31,7 @@
                             <form action="{{ route('tasks.check', ['id' => $task->id]) }}" method="POST">
                                 @csrf
                                 <button
+                                    id="submit-btn"
                                     type="submit"
                                     class="grid-item-check"
                                     aria-label="Check task"
@@ -56,6 +57,7 @@
                             @method('DELETE')
                             @csrf
                             <button
+                                id="submit-btn"
                                 type="submit"
                                 class="grid-item-remove"
                                 aria-label="Remove task"

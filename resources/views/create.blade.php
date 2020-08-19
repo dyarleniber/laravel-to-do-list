@@ -2,6 +2,8 @@
 
 @section('title', 'Create new task')
 
+@section('back', 'true')
+
 @section('content')
 
     <div id="create-content">
