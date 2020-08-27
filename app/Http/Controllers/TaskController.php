@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Validation\Rule;
+use Illuminate\Support\Facades\Auth;
 
 class TaskController extends Controller
 {
@@ -17,7 +18,7 @@ class TaskController extends Controller
      */
     public function index()
     {
-        $tasks = Task::latest()->paginate(15);
+        $tasks = Task::where('user_id', Auth::id())->latest()->paginate(15);
 
         return view('index', ['tasks' => $tasks]);
     }
@@ -50,6 +51,7 @@ class TaskController extends Controller
             $task = new Task();
             $task->name = $request->name;
             $task->completed = false;
+            $task->user_id = Auth::id();
             $task->save();
 
             DB::commit();
@@ -74,7 +76,10 @@ class TaskController extends Controller
      */
     public function show(int $id)
     {
-        $task = Task::find($id);
+        $task = Task::where('id', $id)->where('user_id', Auth::id())->first();
+        if(!$task) {
+            abort(404);
+        }
 
         return view('show', ['task' => $task]);
     }
@@ -87,7 +92,10 @@ class TaskController extends Controller
      */
     public function edit(int $id)
     {
-        $task = Task::find($id);
+        $task = Task::where('id', $id)->where('user_id', Auth::id())->first();
+        if(!$task) {
+            abort(404);
+        }
 
         return view('edit', ['task' => $task]);
     }
@@ -109,7 +117,11 @@ class TaskController extends Controller
         try {
             DB::beginTransaction();
 
-            $task = Task::find($id);
+            $task = Task::where('id', $id)->where('user_id', Auth::id())->first();
+            if(!$task) {
+                abort(404);
+            }
+
             $task->name = $request->name;
             $task->completed = $request->check === 'completed' ? true : false;
             $task->save();
@@ -137,7 +149,11 @@ class TaskController extends Controller
         try {
             DB::beginTransaction();
 
-            $task = Task::find($id);
+            $task = Task::where('id', $id)->where('user_id', Auth::id())->first();
+            if(!$task) {
+                abort(404);
+            }
+
             $task->delete();
 
             DB::commit();
@@ -165,7 +181,11 @@ class TaskController extends Controller
         try {
             DB::beginTransaction();
 
-            $task = Task::find($id);
+            $task = Task::where('id', $id)->where('user_id', Auth::id())->first();
+            if(!$task) {
+                abort(404);
+            }
+
             $task->completed = true;
             $task->save();
 

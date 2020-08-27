@@ -13,6 +13,7 @@
         @else
             <p class="pending-task">Pending Task</p>
         @endif
+        <p class="name">{{ $task->user->name }} - {{ $task->user->email }}</p>
         <div class="bottom">
             <div id="created-at-div">
                 <label for="created-at">Created at</label>

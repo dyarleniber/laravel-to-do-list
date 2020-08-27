@@ -62,17 +62,22 @@ Route::group(['prefix' => 'tasks', 'as' => 'tasks.', 'middleware' => 'auth'], fu
         ->name('store');
 
     Route::get('{id}', 'TaskController@show')
+        ->where('id', '[0-9]+')
         ->name('show');
 
     Route::get('{id}/edit', 'TaskController@edit')
+        ->where('id', '[0-9]+')
         ->name('edit');
 
     Route::put('{id}', 'TaskController@update')
+        ->where('id', '[0-9]+')
         ->name('update');
 
     Route::delete('{id}', 'TaskController@destroy')
+        ->where('id', '[0-9]+')
         ->name('destroy');
 
     Route::post('{id}', 'TaskController@check')
+        ->where('id', '[0-9]+')
         ->name('check');
 });
