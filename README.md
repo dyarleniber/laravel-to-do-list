@@ -20,13 +20,9 @@
   <a href="#memo-license">License</a>
 </p>
 
-to-do list buit with [Laravel framework](https://laravel.com).
+to-do list buit with [Laravel framework](https://laravel.com). This application allows you create new users, log in, log out and reset passwords. The entire authentication system was built using the authentication scaffolding provided by the Laravel framework. Each user can create, retrieve, update and delete tasks. A user cannot view or modify other users' tasks.
 
 The PHP/Laravel development environment was set up with [PHP-FPM](https://php-fpm.org), [Nginx](https://www.nginx.com) and [MySQL](https://www.mysql.com) using [Docker](https://www.docker.com) and [Docker Compose](https://docs.docker.com/compose). For more details about the environment, [access this repository](https://github.com/dyarleniber/laravel-docker).
-
-The application allows you create new users, log in, log out and reset passwords. This entire authentication system was built using the authentication scaffolding provided by the Laravel framework.
-
-Each user can create, retrieve, update and delete tasks. A user cannot view or modify other users' tasks.
 
 These are the routes of the application:
 
@@ -53,9 +49,7 @@ Method    | URI
 `POST`    | `/tasks/{id}`
 `GET`     | `/tasks/{id}/edit`
 
-For the views, the Blade template engine provided with Laravel was used. No front-end framework was used, just pure HTML5 and CSS3.
-
-The assets are compiled through [Laravel Mix](https://github.com/JeffreyWay/laravel-mix), which provides an API for defining Webpack build steps for the application.
+For the views, the Blade template engine provided with Laravel was used. No front-end framework was used, just pure HTML5 and CSS3. The assets are compiled through [Laravel Mix](https://github.com/JeffreyWay/laravel-mix), which provides an API for defining Webpack build steps for the application.
 
 The code base is covered by automated tests with [PHPUnit](https://phpunit.de/) and all the methods provided by the Laravel framework.
 
