@@ -1,79 +1,74 @@
-<p align="center"><img src="https://res.cloudinary.com/dtfbvvkyp/image/upload/v1566331377/laravel-logolockup-cmyk-red.svg" width="400"></p>
+<h1 align="center">
+  Laravel to-do list
+</h1>
 
 <p align="center">
-<a href="https://travis-ci.org/laravel/framework"><img src="https://travis-ci.org/laravel/framework.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://poser.pugx.org/laravel/framework/d/total.svg" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://poser.pugx.org/laravel/framework/v/stable.svg" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://poser.pugx.org/laravel/framework/license.svg" alt="License"></a>
+  to-do list using Laravel framework 7.
 </p>
 
-## About Laravel
+<p align="center">
+  <a href="https://github.com/dyarleniber/laravel-to-do-list/actions?query=workflow%3ACI">
+    <img alt="CI" src="https://github.com/dyarleniber/laravel-to-do-list/workflows/CI/badge.svg">
+  </a>
+  <a href="https://github.com/dyarleniber/laravel-to-do-list/blob/master/LICENSE">
+    <img alt="License" src="https://img.shields.io/github/license/dyarleniber/laravel-to-do-list?label=license">
+  </a>
+</p>
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+<p align="center">
+  <a href="#gear-configuration">Configuration</a>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
+  <a href="#memo-license">License</a>
+</p>
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+to-do list buit with [Laravel framework](https://laravel.com).
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+The code base is covered by automated tests with [PHPUnit](https://phpunit.de/) and all the methods provided by the Laravel framework.
 
-## Learning Laravel
+A CI workflow created on [GitHub Actions](https://github.com/features/actions) is responsible for automatically set up the environment and test the source code. All these jobs are activated by a push or pull request event on master branch.
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+## :gear: Configuration
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains over 1500 video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+To clone and run this application, you’ll need to have [Git](https://git-scm.com), [Docker](https://www.docker.com) and [Docker Compose](https://docs.docker.com/compose) installed on your computer.
 
-## Laravel Sponsors
+From your command line:
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the Laravel [Patreon page](https://patreon.com/taylorotwell).
+```bash
+# Clone this repository
+$ git clone https://github.com/dyarleniber/laravel-to-do-list.git
 
-- **[Vehikl](https://vehikl.com/)**
-- **[Tighten Co.](https://tighten.co)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Cubet Techno Labs](https://cubettech.com)**
-- **[Cyber-Duck](https://cyber-duck.co.uk)**
-- **[Many](https://www.many.co.uk)**
-- **[Webdock, Fast VPS Hosting](https://www.webdock.io/en)**
-- **[DevSquad](https://devsquad.com)**
-- [UserInsights](https://userinsights.com)
-- [Fragrantica](https://www.fragrantica.com)
-- [SOFTonSOFA](https://softonsofa.com/)
-- [User10](https://user10.com)
-- [Soumettre.fr](https://soumettre.fr/)
-- [CodeBrisk](https://codebrisk.com)
-- [1Forge](https://1forge.com)
-- [TECPRESSO](https://tecpresso.co.jp/)
-- [Runtime Converter](http://runtimeconverter.com/)
-- [WebL'Agence](https://weblagence.com/)
-- [Invoice Ninja](https://www.invoiceninja.com)
-- [iMi digital](https://www.imi-digital.de/)
-- [Earthlink](https://www.earthlink.ro/)
-- [Steadfast Collective](https://steadfastcollective.com/)
-- [We Are The Robots Inc.](https://watr.mx/)
-- [Understand.io](https://www.understand.io/)
-- [Abdel Elrafa](https://abdelelrafa.com)
-- [Hyper Host](https://hyper.host)
-- [Appoly](https://www.appoly.co.uk)
-- [OP.GG](https://op.gg)
-- [云软科技](http://www.yunruan.ltd/)
+# Go into the repository folder
+$ cd laravel-to-do-list
 
-## Contributing
+# Create a new .env file based on .env.example
+$ cp .env.example .env
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+# Optionally, you can set new database environment variables, but with the variables within the .env.example file should work
 
-## Code of Conduct
+# Build the app image and run the environment in background mode with the following command:
+$ docker-compose up -d
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+# Install the application dependencies (The Composer commmand will be executed in the "app" service container):
+$ docker-compose exec app composer install
 
-## Security Vulnerabilities
+# Generate a unique application key with the artisan Laravel command-line tool (This key is used to encrypt user sessions and other sensitive data):
+$ docker-compose exec app php artisan key:generate
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+# Run the migrations
+$ docker-compose exec app php artisan migrate
 
-## License
+# Now go to your browser and access your server’s domain name or IP address on port 8000: http://server_domain_or_IP:8000. In case you are running this demo on your local machine, use http://localhost:8000 to access the application from your browser
+```
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+In addition to the PHPUnit command, you may use the test artisan Laravel command-line to run the tests:
+
+```bash
+$ docker-compose exec app php artisan test
+```
+
+## :memo: License
+
+This project is under the MIT license. See the [LICENSE](https://github.com/dyarleniber/laravel-to-do-list/blob/master/LICENSE) for more information.
+
+---
+
+Made with ♥ by Dyarlen Iber :wave: [Get in touch!](https://dyarleniber.com)
