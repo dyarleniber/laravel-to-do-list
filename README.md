@@ -3,7 +3,7 @@
 </h1>
 
 <p align="center">
-  to-do list using Laravel framework 7.
+  :clipboard: to-do list with authentication using Laravel 7 framework applying feature tests.
 </p>
 
 <p align="center">
@@ -20,7 +20,7 @@
   <a href="#memo-license">License</a>
 </p>
 
-to-do list buit with [Laravel framework](https://laravel.com). This application allows you create new users, log in, log out and reset passwords. The entire authentication system was built using the authentication scaffolding provided by the Laravel framework. Each user can create, retrieve, update and delete tasks. A user cannot view or modify other users' tasks.
+to-do list with authentication using [Laravel framework](https://laravel.com). This application allows you create new users, log in, log out and reset passwords. The entire authentication system was built using the authentication scaffolding provided by the Laravel framework. Each user can create, retrieve, update and delete tasks. A user cannot view or modify other users' tasks.
 
 The PHP/Laravel development environment was set up with [PHP-FPM](https://php-fpm.org), [Nginx](https://www.nginx.com) and [MySQL](https://www.mysql.com) using [Docker](https://www.docker.com) and [Docker Compose](https://docs.docker.com/compose). For more details about the environment, [access this repository](https://github.com/dyarleniber/laravel-docker).
 
