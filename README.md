@@ -22,6 +22,41 @@
 
 to-do list buit with [Laravel framework](https://laravel.com).
 
+The PHP/Laravel development environment was set up with [PHP-FPM](https://php-fpm.org), [Nginx](https://www.nginx.com) and [MySQL](https://www.mysql.com) using [Docker](https://www.docker.com) and [Docker Compose](https://docs.docker.com/compose). For more details about the environment, [access this repository](https://github.com/dyarleniber/laravel-docker).
+
+The application allows you create new users, log in, log out and reset passwords. This entire authentication system was built using the authentication scaffolding provided by the Laravel framework.
+
+Each user can create, retrieve, update and delete tasks. A user cannot view or modify other users' tasks.
+
+These are the routes of the application:
+
+Method    | URI
+---       | ---
+`GET`     | `/`
+`GET`     | `/login`
+`POST`    | `/login`
+`POST`    | `/logout`
+`POST`    | `/password/confirm`
+`GET`     | `/password/confirm`
+`POST`    | `/password/email`
+`POST`    | `/password/reset`
+`GET`     | `/password/reset`
+`GET`     | `/password/reset/{token}`
+`POST`    | `/register`
+`GET`     | `/register`
+`GET`     | `/tasks`
+`POST`    | `/tasks`
+`GET`     | `/tasks/create`
+`GET`     | `/tasks/{id}`
+`PUT`     | `/tasks/{id}`
+`DELETE`  | `/tasks/{id}`
+`POST`    | `/tasks/{id}`
+`GET`     | `/tasks/{id}/edit`
+
+For the views, the Blade template engine provided with Laravel was used. No front-end framework was used, just pure HTML5 and CSS3.
+
+The assets are compiled through [Laravel Mix](https://github.com/JeffreyWay/laravel-mix), which provides an API for defining Webpack build steps for the application.
+
 The code base is covered by automated tests with [PHPUnit](https://phpunit.de/) and all the methods provided by the Laravel framework.
 
 A CI workflow created on [GitHub Actions](https://github.com/features/actions) is responsible for automatically set up the environment and test the source code. All these jobs are activated by a push or pull request event on master branch.
@@ -42,21 +77,25 @@ $ cd laravel-to-do-list
 # Create a new .env file based on .env.example
 $ cp .env.example .env
 
-# Optionally, you can set new database environment variables, but with the variables within the .env.example file should work
+# Optionally, you can set new database environment variables
+# But with the variables within the .env.example file should work
 
-# Build the app image and run the environment in background mode with the following command:
+# Build the app image and run the environment in background mode:
 $ docker-compose up -d
 
-# Install the application dependencies (The Composer commmand will be executed in the "app" service container):
+# Install the application dependencies
+# The Composer commmand will be executed in the "app" service container:
 $ docker-compose exec app composer install
 
-# Generate a unique application key with the artisan Laravel command-line tool (This key is used to encrypt user sessions and other sensitive data):
+# Generate a unique application key with the artisan Laravel command-line tool
+# This key is used to encrypt user sessions and other sensitive data:
 $ docker-compose exec app php artisan key:generate
 
 # Run the migrations
 $ docker-compose exec app php artisan migrate
 
-# Now go to your browser and access your server’s domain name or IP address on port 8000: http://server_domain_or_IP:8000. In case you are running this demo on your local machine, use http://localhost:8000 to access the application from your browser
+# Now go to your browser and access your server’s domain name or IP address on port 8000
+# In case you are running on your local machine, use http://localhost:8000
 ```
 
 In addition to the PHPUnit command, you may use the test artisan Laravel command-line to run the tests:
